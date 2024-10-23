@@ -1,0 +1,115 @@
+@import '../color.scss';
+@import '../assets/fonts/fonts.scss';
+
+.booking_form {
+    display: flex;
+    justify-content: center;
+    .initial_display {
+        display: flex;
+        flex-direction: column;
+        justify-self: center;
+        width: 50%;
+        color: $brown;
+        @media screen and (max-width: 991px) {
+            font-size: 1.2em;
+        }
+
+        @media screen and (max-width: 575px) {
+            width: 100%;
+            margin: 2%;
+            font-size: 1.2em;
+        }
+
+        .top_paper{
+            display:flex;
+            margin: 5% 5% 2% 5%;
+            padding: 5%;
+            background-color: $light_yellow;
+            .MuiTypography-root {
+                span {
+                    color: $red;
+                }
+            }
+        }
+        .bottom_paper{
+            flex-direction: column;
+            background-color: $light_yellow;
+            display:flex;
+            margin: 2% 5% 5% 5%;
+            padding: 5%;
+            align-items: center;
+            
+            .MuiButtonBase-root{
+                display: flex;
+                background-color: $brown;
+                width: fit-content;
+                text-transform: none;
+                margin:5px;
+            }
+        }
+    }
+    .MuiBox-root {
+        display: flex;
+        width:100%;
+        justify-content: center;
+        margin: 2%;
+
+        .MuiPaper-root {
+            .form_container {
+                .form_head {
+                    .text_head {
+                        padding: 5%;
+                        font-size: 1.4em;
+                        text-align: center;
+                        font-family: Arial, Helvetica, sans-serif;
+                        color: $brown;
+
+                        @media screen and (max-width: 991px) {
+                            font-size: 1.2em;
+                        }
+
+                        @media screen and (max-width: 575px) {
+                            font-size: 1.2em;
+                            padding: 30px;
+                        }
+                    }
+                }
+
+                .form_fields {
+                    height: 80px;
+
+                    .labels {
+                        display: flex;
+                        float: left;
+                        font-family: Arial, Helvetica, sans-serif;
+                        width: 25%;
+                        padding: 10px 15px;
+                        font-size: 1.0;
+                    }
+
+                    .MuiFormControl-root {
+                        display: flex;
+                        float: left;
+                        width: 72%;
+                    }
+
+                    .error-message {
+                        padding-left: 25%;
+                        color:$red;
+                    }
+                }
+            }
+
+            .create_request {
+                height: 80px;
+                float: right;
+                padding-right: 20px;
+                justify-content: center;
+
+                .MuiButtonBase-root {
+                    background-color: $brown;
+                }
+            }
+        }
+    }
+}

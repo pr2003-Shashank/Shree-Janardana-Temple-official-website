@@ -1,0 +1,176 @@
+@import '../color.scss';
+@import '../assets/fonts/fonts.scss';
+
+.footer_container {
+    background-color: $brown;
+    display: flex;
+    width: 100%;
+    .MuiBox-root {
+        width: 100%;
+        .top_container {
+            .footer_divider {
+                background-color: $white;
+                margin: 1px 15px;
+            }
+            .MuiTypography-root {
+                display: flex;
+                color: $light_yellow;
+                margin: 1%;
+                font-size: 1.4em;
+                font-family: Arial, Helvetica, sans-serif;
+
+                @media screen and (max-width: 768px) {
+                    font-size: 1.2em;
+                }
+
+                @media screen and (max-width: 576px) {
+                    font-size: 1.2em;
+                    justify-content: center;
+                }
+
+                @media screen and (max-width: 450px) {
+                    font-size: 1.0em;
+                }
+            }
+        }
+
+        .bottom_container {
+            display: flex;
+            justify-content: space-evenly;
+
+            @media screen and (max-width: 670px) {
+                display: block;
+            }
+
+            .list_container {
+                margin: 20px 40px;
+
+                @media screen and (max-width: 670px) {
+                    display: block;
+                    margin: 20px auto;
+                }
+
+                .list_title {
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 0.9em;
+                    color: $yellow;
+
+                    @media screen and (max-width: 670px) {
+                        text-align: center;
+                    }
+                }
+
+                .MuiList-root {
+                    @media screen and (max-width: 670px) {
+                        display: block;
+                    }
+
+                    .MuiListItem-root {
+                        padding: 1px;
+                        -webkit-flex-grow: unset;
+                        flex-grow: unset;
+
+                        @media screen and (max-width: 670px) {
+                            justify-content: center;
+                        }
+
+                        .MuiListItemText-root {
+                            margin: 0;
+                            -webkit-flex: unset;
+                            flex: unset;
+
+                            .MuiTypography-root {
+                                font-family: Arial, Helvetica, sans-serif;
+                                font-size: 0.9em;
+                                color: $white;
+
+                                &:hover {
+                                    color: $light_yellow;
+                                }
+
+                            }
+
+                            &.active {
+                                .MuiTypography-root {
+                                    font-family: Arial, Helvetica, sans-serif;
+                                    color: $white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .button_container{
+                display: flex;
+                margin: 20px 40px;
+                flex-direction: column;
+
+                @media screen and (max-width: 670px) {
+                    display: block;
+                    margin: 20px auto;
+                }
+                .booking_button{
+                    display: flex;
+                    width: 100%;
+                    @media screen and (max-width: 670px) {
+                        justify-content: center;
+                    }
+                    .MuiButtonBase-root{
+                        background-color: $white;
+                        color: $brown;
+                        text-transform: none;
+                        height: fit-content;
+                        @media screen and (max-width: 670px) {
+                            justify-content: center;
+                        }
+                    }
+                }
+                .MuiList-root {
+                    @media screen and (max-width: 670px) {
+                        display: block;
+                    }
+
+                    .MuiListItem-root {
+                        padding: 1px;
+                        -webkit-flex-grow: unset;
+                        flex-grow: unset;
+
+                        @media screen and (max-width: 670px) {
+                            justify-content: center;
+                        }
+
+                        .MuiListItemText-root {
+                            margin: 0;
+                            -webkit-flex: unset;
+                            flex: unset;
+
+                            .MuiTypography-root {
+                                font-family: Arial, Helvetica, sans-serif;
+                                font-style: italic;
+                                font-size: 0.9em;
+                                color: $light_yellow;
+
+                                &:hover {
+                                    color: $light_yellow;
+                                }
+
+                            }
+
+                            &.active {
+                                .MuiTypography-root {
+                                    font-family: Arial, Helvetica, sans-serif;
+                                    color: $white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .footer_divider {
+                background-color: $white;
+                margin: 1px 15px;
+            }
+        }
+    }
+}
