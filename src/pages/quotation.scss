@@ -2,5 +2,75 @@
 @import '../assets/fonts/fonts.scss';
 
 .quotation_container {
-    
+    display: flex;
+    justify-content: center;
+    .quotation_draft_container {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        padding: 2%;
+        margin: 2%;
+        color: $brown;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.0em;
+        background-color: $light_yellow;
+
+        @media screen and (max-width: 991px) {
+            width: 70%;
+        }
+
+        @media screen and (max-width: 768px) {
+            width: 80%;
+            font-size: 0.9em;
+        }
+
+        @media screen and (max-width: 575px) {
+            width: 100%;
+            margin: 2%;
+        }
+
+        .price_overview {
+            display: flex;
+            width: 100%;
+
+            .content {
+                width: 70%;
+            }
+
+            .price {
+                width: 25%;
+            }
+        }
+        .quotation_divider{
+            background-color: $brown;
+            margin: 10px 2px;
+        }
+        .get_quotation{
+            background-color: $brown;
+            width: fit-content;
+            color: $white;
+            text-transform: none;
+            align-self: center;
+            &:disabled{
+                background-color: rgb(105, 64, 47,0.2);
+            }
+        }
+        .sweets_table{
+            .MuiBox-root{
+                .MuiPaper-root{
+                    .MuiToolbar-root{
+                        .sweet_select{
+                            background-color: $brown;
+                            text-transform: none;
+                        }
+                    }
+                    .MuiCheckbox-root{
+                        .MuiSvgIcon-root{
+                            fill: $brown;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

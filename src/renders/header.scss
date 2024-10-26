@@ -13,6 +13,10 @@
                     @media screen and (max-Width:750px){
                         font-size: 1.0em;
                     }
+                    @media screen and (max-Width:400px){
+                        font-size: 0.8em;
+                    }
+
                 }
                 .MuiButtonBase-root{
                     color: $white;
@@ -22,6 +26,9 @@
                     text-transform: none; 
                     @media screen and (max-Width:750px){
                         font-size: 0.9em;
+                    }
+                    @media screen and (max-Width:400px){
+                        font-size: 0.7em;
                     }
                 }
                 .MuiIconButton-root{
