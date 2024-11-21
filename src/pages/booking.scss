@@ -4,53 +4,60 @@
 .booking_form {
     display: flex;
     justify-content: center;
-    .initial_display {
+
+    .after_submit {
         display: flex;
         flex-direction: column;
-        justify-self: center;
-        width: 50%;
-        color: $brown;
-        @media screen and (max-width: 991px) {
-            font-size: 1.2em;
-        }
+        justify-content: center;
+        color: $dark_pink;
+        align-items: center;
+        margin: 2%;
+        padding: 2%;
 
-        @media screen and (max-width: 575px) {
-            width: 100%;
-            margin: 2%;
-            font-size: 1.2em;
-        }
+        .MuiTypography-root {
+            font-family: Poppins;
+            font-size: 1.0em;
 
-        .top_paper{
-            display:flex;
-            margin: 5% 5% 2% 5%;
-            padding: 5%;
-            background-color: $light_yellow;
-            .MuiTypography-root {
-                span {
-                    color: $red;
-                }
+            @media screen and (max-width: 991px) {
+                font-size: 0.9em;
             }
+
+            @media screen and (max-width: 768px) {
+                font-size: 0.9em;
+            }
+
+            @media screen and (max-width: 576px) {
+                font-size: 0.8em;
+            }
+
         }
-        .bottom_paper{
-            flex-direction: column;
-            background-color: $light_yellow;
-            display:flex;
-            margin: 2% 5% 5% 5%;
-            padding: 5%;
-            align-items: center;
-            
-            .MuiButtonBase-root{
-                display: flex;
-                background-color: $brown;
-                width: fit-content;
-                text-transform: none;
-                margin:5px;
+
+        .MuiButtonBase-root {
+            width: fit-content;
+            text-transform: none;
+            color: $white;
+            font-family: Poppins;
+            background-color: $dark_pink;
+            font-size: 1.0em;
+            margin: 2%;
+
+            @media screen and (max-width: 991px) {
+                font-size: 0.9em;
+            }
+
+            @media screen and (max-width: 768px) {
+                font-size: 0.8em;
+            }
+
+            @media screen and (max-width: 576px) {
+                font-size: 0.7em;
             }
         }
     }
+
     .MuiBox-root {
         display: flex;
-        width:100%;
+        width: 100%;
         justify-content: center;
         margin: 2%;
 
@@ -59,17 +66,21 @@
                 .form_head {
                     .text_head {
                         padding: 5%;
-                        font-size: 1.4em;
                         text-align: center;
-                        font-family: Arial, Helvetica, sans-serif;
-                        color: $brown;
+                        font-family: Poppins;
+                        color: $dark_pink;
+                        font-size: 1.4em;
 
                         @media screen and (max-width: 991px) {
                             font-size: 1.2em;
                         }
 
-                        @media screen and (max-width: 575px) {
-                            font-size: 1.2em;
+                        @media screen and (max-width: 768px) {
+                            font-size: 1.0em;
+                        }
+
+                        @media screen and (max-width: 576px) {
+                            font-size: 0.9em;
                             padding: 30px;
                         }
                     }
@@ -81,10 +92,22 @@
                     .labels {
                         display: flex;
                         float: left;
-                        font-family: Arial, Helvetica, sans-serif;
+                        font-family: Poppins;
                         width: 25%;
                         padding: 10px 15px;
-                        font-size: 1.0;
+                        font-size: 1.0em;
+
+                        @media screen and (max-width: 991px) {
+                            font-size: 1.0em;
+                        }
+
+                        @media screen and (max-width: 768px) {
+                            font-size: 0.9em;
+                        }
+
+                        @media screen and (max-width: 576px) {
+                            font-size: 0.8em;
+                        }
                     }
 
                     .MuiFormControl-root {
@@ -95,7 +118,21 @@
 
                     .error-message {
                         padding-left: 25%;
-                        color:$red;
+                        color: $red;
+                        font-size: 1.0em;
+                        font-family: Poppins;
+
+                        @media screen and (max-width: 991px) {
+                            font-size: 1.0em;
+                        }
+
+                        @media screen and (max-width: 768px) {
+                            font-size: 0.9em;
+                        }
+
+                        @media screen and (max-width: 576px) {
+                            font-size: 0.8em;
+                        }
                     }
                 }
             }
@@ -107,7 +144,8 @@
                 justify-content: center;
 
                 .MuiButtonBase-root {
-                    background-color: $brown;
+                    background-color: $dark_pink;
+                    font-family: Poppins;
                 }
             }
         }

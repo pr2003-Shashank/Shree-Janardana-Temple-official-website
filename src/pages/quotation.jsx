@@ -1,283 +1,189 @@
-import React, { useEffect, useState } from 'react';
-import Papa from 'papaparse'; // CSV parsing library
+import React, { useEffect, useState } from "react";
+import { Button,Box,Paper,Typography } from "@mui/material";
 import './quotation.scss';
-import {Box,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Checkbox,Typography,Button,Paper,Toolbar,TablePagination,Divider,} from '@mui/material';
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import { useNavigate } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
+// Import the main component
+import { Viewer } from '@react-pdf-viewer/core';
+import { Worker } from '@react-pdf-viewer/core';
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 
-function GetQuotation() {
-  const [products, setProducts] = useState([]);
-  const [selectedRows, setSelectedRows] = useState([]);
-  const [selectedSweet, setSelectedSweet] = useState(false);
+// Import styles
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+
+// Import the styles
+import '@react-pdf-viewer/core/lib/styles/index.css';
+
+function Quotation() {
+  const navigate = useNavigate();
+  const defaultLayoutPluginInstance = defaultLayoutPlugin();
+  const [pdfUrl, setPdfUrl] = useState(); // State to store the PDF URL
+  const getDefaultScale = () => {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth > 1024) return 0.75; // Desktop
+    if (screenWidth > 768) return 0.65; // Tablet
+    if (screenWidth > 356) return 0.55;
+    return 0.45; // Small screens
+  };
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    defaultQuantity: "",
-    date: ""
+    people: "",
+    date: "",
   });
 
-  // Google Sheet CSV URL (published Google Sheet link)
-  const baseSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRuWARY0Y8KpEDf7LCiMwg1cSNht-Jp_VcPj5cFr5P6DIDVVtddyenn89OKwu7Guc3x5KIAuQa7gnIa/pub?output=csv';
-
-  const fetchData = () => {
-    const sheetUrl = `${baseSheetUrl}&t=${new Date().getTime()}`;
-    fetch(sheetUrl)
-      .then(response => response.text())
-      .then(data => {
-        Papa.parse(data, {
-          header: true,
-          complete: (results) => {
-            setProducts(results.data);
-          },
-        });
-      });
+  const fetchPdfBlob = async () => {
+    const pdfDataUrl = sessionStorage.getItem('pdfBlob');
+    if (pdfDataUrl) {
+      try {
+        const response = await fetch(pdfDataUrl);
+        const pdfBlob = await response.blob();
+        setPdfUrl(URL.createObjectURL(pdfBlob));
+      } catch (error) {
+        console.error("Error fetching blob from sessionStorage:", error);
+      }
+    }
   };
-
+  // Fetch stored form data from session storage
   useEffect(() => {
-    // Fetch data when the component mounts
-    fetchData();
-
-    // Retrieve form data from session storage
-    const storedFormData = JSON.parse(sessionStorage.getItem('formData'));
-
-    // Check if formData exists, then update the state
+    const storedFormData = sessionStorage.getItem("formData");
     if (storedFormData) {
+      const parsedData = JSON.parse(storedFormData);
       setFormData({
-        name: storedFormData.name || "",
-        email: storedFormData.email || "",
-        phone: storedFormData.phone || "",
-        defaultQuantity: storedFormData.people || "",
-        date: storedFormData.date || ""
+        name: parsedData.name || "",
+        email: parsedData.email || "",
+        phone: parsedData.phone || "",
+        people: parsedData.people || "",
+        date: parsedData.date || "",
       });
     }
+    fetchPdfBlob();
+
   }, []);
 
-  // Select or deselect all rows
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      setSelectedRows(products); // Select all rows
-    } else {
-      setSelectedRows([]); // Deselect all rows
+  const handleSubmit = async () => {
+    try {
+      const pdfDataUrl = sessionStorage.getItem("pdfBlob");
+      const storedFormData = sessionStorage.getItem("formData");
+      const formData = storedFormData ? JSON.parse(storedFormData) : {};
+
+      if (!pdfDataUrl || !formData) {
+        alert("Form data or PDF is missing!");
+        return;
+      }
+
+      // Convert Data URL to Base64 String
+      const base64Pdf = pdfDataUrl.split(",")[1];
+
+      // Prepare the payload
+      const payload = {
+        ...formData,
+        pdfBlob: base64Pdf, // Attach the Base64 PDF blob
+      };
+
+      // Send the data to Apps Script
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbxVHBBLROyB2xY7huaNcy51r7tIYr02KTMgtUqrqwWigZWhhM33eeTjPpmI5JBkh33C/exec", // Replace YOUR_SCRIPT_ID with your Apps Script Deployment ID
+        {
+          method: "POST",
+          // headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const result = await response.json();
+      if (result.status === "success") {
+        alert("Successfully sent!");
+        sessionStorage.clear();
+        navigate('/quotation');
+      } else {
+        alert(`Failed to send data: ${result.message}`);
+      }
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      alert("An error occurred while submitting data.");
     }
   };
-
-  // Select or deselect a single row
-  const handleRowClick = (row) => {
-    const isSelected = selectedRows.some((selected) => selected['Product Id'] === row['Product Id']);
-    if (isSelected) {
-      setSelectedRows(selectedRows.filter((selected) => selected['Product Id'] !== row['Product Id']));
-    } else {
-      setSelectedRows([...selectedRows, row]);
-    }
-  };
-
-  //finish selecting sweets handle
-  const handleSubmit = () => {
-    setSelectedSweet(true);
-    sessionStorage.setItem('sweetsData',JSON.stringify(selectedRows));
-    };
-
-  // Pagination state
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5); // Default rows per page
-
-  // Handle pagination page change
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  // Handle rows per page change
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0); // Reset to the first page
-  };
-
-  // Get current page products
-  const paginatedProducts = products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
-  // The business logic for the price calculation goes here
-  const getFixedPrice = (defaultQuantity) => {
-    let fixedPrice = 0;
-    if (defaultQuantity < 100) {
-      fixedPrice = defaultQuantity * 150;
-    } else if (defaultQuantity < 500) {
-      fixedPrice = defaultQuantity * 100;
-    } else {
-      fixedPrice = defaultQuantity * 85;
-    }
-    return fixedPrice;
-  };
-
-  function viewPDF() {
-    // Initialize jsPDF instance
-    const doc = new jsPDF();
-  
-    // Title
-    doc.setFontSize(18);
-    doc.text('Quotation', 105, 20, null, null, 'center');
-  
-    // Add user information
-    doc.setFontSize(12);
-    doc.text(`Name: ${formData.name}`, 20, 40);
-    doc.text(`Email: ${formData.email}`, 20, 50);
-    doc.text(`Phone: ${formData.phone}`, 20, 60);
-  
-    // Table of selected sweets
-    const tableData = selectedRows.map((row, index) => [
-      index + 1,
-      row['Product Name'],
-      row['Price'],
-      formData.defaultQuantity,
-      row['Price'] * formData.defaultQuantity
-    ]);
-  
-    // Table column headers
-    const headers = [["#", "Sweet Name", "Unit Price", "Quantity", "Total Price"]];
-  
-    // Total Cost Calculation
-    const totalCost = selectedRows.reduce(
-      (acc, row) => acc + row['Price'] * formData.defaultQuantity,
-      0
-    );
-  
-    // Add table to the PDF
-    doc.autoTable({
-      startY: 70,
-      head: headers,
-      body: tableData,
-    });
-  
-    // Display total cost at the bottom
-    doc.text(`Total Cost: Rs. ${totalCost}`, 20, doc.lastAutoTable.finalY + 20);
-  
-    // Open the PDF in a new window for preview
-    const pdfDataUri = doc.output('datauristring'); // Generates a Data URI
-    const pdfWindow = window.open();
-    pdfWindow.document.write(
-      `<iframe src="${pdfDataUri}" width="100%" height="100%" style="border: none;"></iframe>`
-    );
-  }
 
   return (
-    <div className='quotation_container'>
-      <Paper elevation={10} className='quotation_draft_container'>
-        <div className='price_overview'>
-          <Typography component='div' className='content'>
-            Fixed Price for {formData.defaultQuantity} people is
-          </Typography>
-          <Typography component='div' className='price'>
-            : Rs. {getFixedPrice(formData.defaultQuantity)}
-          </Typography>
-        </div>
-        {selectedRows.map((row, index) => (
-          <div className='price_overview' key={`${row['Product Id']}-${index}`}>
-            <Typography component='div' className='content'>
-              {formData.defaultQuantity} {row['Product Name']}
-            </Typography>
-            <Typography component='div' className='price'>
-              : Rs. {row['Price'] * formData.defaultQuantity}
-            </Typography>
-          </div>
-        ))}
+    <div className="quotation_container">
+      {sessionStorage.length !== 0 ? (
+        pdfUrl ? (
+          <>
+            <div className="pdf_preview">
+              <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+                <div className="pdf_viewer">
+                  <Viewer
+                    plugins={[defaultLayoutPluginInstance]}
+                    fileUrl={pdfUrl}
+                    defaultScale={getDefaultScale} // Set default zoom level to fit content
+                  />
+                </div>
+              </Worker>
+            </div>
+            <div className="quotation_actions">
+              <Button
+                className="download_btn"
+                variant="contained"
+                sx={{ m: 1 }}
+                onClick={() => {
+                  const link = document.createElement("a");
+                  link.href = sessionStorage.getItem('pdfBlob');
+                  link.download = "Quotation.pdf";
+                  link.click();
+                }}
+              >
+                Download Quotation
+              </Button>
+              <Typography><span>{formData.name}</span>, please verify the quotation generated. If you have verified then click on confirm to book your function on <span>{formData.date}</span>.</Typography>
+              <Button
+                className="confirm_btn"
+                variant="contained"
+                sx={{ m: 1 }}
+                onClick={handleSubmit}
+              >
+                Confirm your booking
+              </Button>
+            </div>
+          </>
+        ) : (
+          <div className="loading">
+            <CircularProgress color='#970747' />
+          </div>)
 
-        <Divider
-          orientation='horizontal'
-          flexItem
-          className='quotation_divider'
-        />
-
-        <Button
-          variant='contained'
-          className='get_quotation'
-          onClick={viewPDF}
-          disabled={selectedSweet ? false : true}
-        >
-          Get Quotation
-        </Button>
-        {!selectedSweet && (
-          <div className='sweets_table'>
-            <Typography>Please select the sweets from the below list.</Typography>
-            <Box sx={{ width: '100%' }}>
-              <Paper sx={{ mb: 2 }}>
-                <Toolbar>
-                  <Typography component="div" sx={{ flex: '1 1 50%' }}>
-                    Sweets
-                  </Typography>
-                  {selectedRows.length > 0 && (
-                    <>
-                      <Typography sx={{ mr: 1 }}>
-                        {selectedRows.length} selected
-                      </Typography>
-                      <Button
+      ) : (
+        <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    '& > :not(style)': {
+                        m: 1,
+                        width: 575,
+                    },
+                }}
+            >
+                <Paper
+                    elevation={10}
+                    className="submit"
+                >
+                    <Typography>
+                        Your booking is confirmed. Thank you!!!1
+                    </Typography>
+                    <Button
                         variant="contained"
-                        onClick={handleSubmit}
-                        className='sweet_select'
-                      >
-                        Done
-                      </Button>
-                    </>
-                  )}
-                </Toolbar>
-                <TableContainer>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            indeterminate={selectedRows.length > 0 && selectedRows.length < products.length}
-                            checked={products.length > 0 && selectedRows.length === products.length}
-                            onChange={handleSelectAllClick}
-                          />
-                        </TableCell>
-                        <TableCell>ID</TableCell>
-                        <TableCell>Sweet Name</TableCell>
-                        <TableCell align="right">Price</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {paginatedProducts.map((row) => {
-                        const isSelected = selectedRows.some((selected) => selected['Product Id'] === row['Product Id']);
-                        return (
-                          <TableRow
-                            key={row['Product Id']}
-                            onClick={() => handleRowClick(row)}
-                            role="checkbox"
-                            aria-checked={isSelected}
-                            selected={isSelected}
-                          >
-                            <TableCell padding="checkbox">
-                              <Checkbox
-                                color="primary"
-                                checked={isSelected}
-                                onChange={() => handleRowClick(row)}
-                              />
-                            </TableCell>
-                            <TableCell>{row['Product Id']}</TableCell>
-                            <TableCell>{row['Product Name']}</TableCell>
-                            <TableCell align="right">{row['Price']}</TableCell>
-                          </TableRow>
-                        );
-                      })}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-                <TablePagination
-                  component="div"
-                  rowsPerPageOptions={[5, 10, 25]}
-                  count={products.length}
-                  page={page}
-                  onPageChange={handleChangePage}
-                  rowsPerPage={rowsPerPage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-              </Paper>
+                        onClick={(e) =>
+                            navigate('/home')
+                        }
+                    >
+                        Back to Home
+                    </Button>
+                </Paper>
             </Box>
-          </div>
-        )}
-      </Paper>
+      )}
     </div>
   );
 }
 
-export default GetQuotation;
+export default Quotation;

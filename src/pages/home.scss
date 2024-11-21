@@ -10,19 +10,20 @@
         .banner_image{
             width: 100%;
             height: fit-content;
+            padding: 2%;
             @media screen and (max-width: 1200px) {
                 height: 400px;
                 object-fit: cover;
             }
-            @media screen and (max-width: 991px) {
-                object-fit: cover;
-            }
-            @media screen and (max-width: 768px) {
-                object-fit: cover;
-            }
-            @media screen and (max-width: 576px) {
+            // @media screen and (max-width: 991px) {
+            //     object-fit: cover;
+            // }
+            // @media screen and (max-width: 768px) {
+            //     object-fit: cover;
+            // }
+            // @media screen and (max-width: 576px) {
             
-            }
+            // }
         }
     }
 }

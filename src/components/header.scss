@@ -1,0 +1,78 @@
+@import '../color.scss';
+@import '../assets/fonts/fonts.scss';
+
+.header_container {
+    .MuiBox-root {
+        .MuiPaper-root {
+            background-color: $white;
+            .MuiToolbar-root {
+                display: flex;
+                justify-content: space-between;
+                .header_logo {
+                    display: flex;
+                    height: 100px;
+                    padding: 1%;
+
+                    @media screen and (max-width: 991px) {
+                        height: 90px;
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        height: 80px;
+                        max-width: 60px;
+                    }
+
+                    @media screen and (max-width: 576px) {
+                        height: 70px;
+                        max-width: 50px;
+                    }
+
+                }
+
+                .MuiTypography-root {
+                    color: $dark_pink;
+                    font-size: 1.4em;
+                    font-family: Poppins;
+
+                    @media screen and (max-width: 991px) {
+                        font-size: 1.2em;
+                    }
+    
+                    @media screen and (max-width: 768px) {
+                        font-size: 1.0em;
+                    }
+    
+                    @media screen and (max-width: 576px) {
+                        font-size: 0.9em;
+                    }
+
+                    @media screen and (max-width: 375px) {
+                        display: none;
+                    }
+
+                }
+
+                .MuiButtonBase-root {
+                    display: flex;
+                    color: $white;
+                    background-color: $dark_pink;
+                    text-transform: none;
+                    font-size: 1.0em;
+                    font-family: Poppins;
+
+                    @media screen and (max-width: 991px) {
+                        font-size: 0.9em;
+                    }
+    
+                    @media screen and (max-width: 768px) {
+                        font-size: 0.8em;
+                    }
+    
+                    @media screen and (max-width: 576px) {
+                        font-size: 0.7em;
+                    }
+                }
+            }
+        }
+    }
+}

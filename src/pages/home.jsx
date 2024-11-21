@@ -1,5 +1,5 @@
 import React from "react";
-import Banner from '../assets/images/banner (1).png';
+import Banner from '../assets/images/Home_banner.png';
 import './home.scss';
 
 function Home(){

@@ -3,72 +3,156 @@
 
 .quotation_container {
     display: flex;
-    justify-content: center;
-    .quotation_draft_container {
+    flex-direction: column;
+
+    .pdf_preview {
         display: flex;
-        flex-direction: column;
-        width: 50%;
-        padding: 2%;
-        margin: 2%;
-        color: $brown;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 1.0em;
-        background-color: $light_yellow;
+        justify-content: center;
 
-        @media screen and (max-width: 991px) {
-            width: 70%;
-        }
-
-        @media screen and (max-width: 768px) {
-            width: 80%;
-            font-size: 0.9em;
-        }
-
-        @media screen and (max-width: 575px) {
-            width: 100%;
+        .pdf_viewer {
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            height: auto; // Full height
+            width: 90%;
             margin: 2%;
         }
+    }
 
-        .price_overview {
+    .quotation_actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .download_btn {
             display: flex;
-            width: 100%;
+            width: fit-content;
+            color: $dark_pink;
+            background-color: $white;
+            text-transform: none;
+            font-size: 1.0em;
+            font-family: Poppins;
 
-            .content {
-                width: 70%;
+            @media screen and (max-width: 991px) {
+                font-size: 0.9em;
             }
 
-            .price {
-                width: 25%;
+            @media screen and (max-width: 768px) {
+                font-size: 0.8em;
+            }
+
+            @media screen and (max-width: 576px) {
+                font-size: 0.7em;
             }
         }
-        .quotation_divider{
-            background-color: $brown;
-            margin: 10px 2px;
+
+        .MuiTypography-root {
+            font-size: 1.0em;
+            font-family: Poppins;
+
+            @media screen and (max-width: 991px) {
+                font-size: 0.9em;
+            }
+
+            @media screen and (max-width: 768px) {
+                font-size: 0.8em;
+            }
+
+            @media screen and (max-width: 576px) {
+                font-size: 0.7em;
+            }
+
+            span {
+                color: $dark_pink;
+                font-size: 1.1em;
+                font-family: Poppins;
+
+                @media screen and (max-width: 991px) {
+                    font-size: 1.0em;
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 576px) {
+                    font-size: 0.8em;
+                }
+            }
         }
-        .get_quotation{
-            background-color: $brown;
+
+        .confirm_btn {
+            display: flex;
             width: fit-content;
             color: $white;
+            background-color: $dark_pink;
             text-transform: none;
-            align-self: center;
-            &:disabled{
-                background-color: rgb(105, 64, 47,0.2);
+            font-size: 1.0em;
+            font-family: Poppins;
+
+            @media screen and (max-width: 991px) {
+                font-size: 0.9em;
+            }
+
+            @media screen and (max-width: 768px) {
+                font-size: 0.8em;
+            }
+
+            @media screen and (max-width: 576px) {
+                font-size: 0.7em;
             }
         }
-        .sweets_table{
-            .MuiBox-root{
-                .MuiPaper-root{
-                    .MuiToolbar-root{
-                        .sweet_select{
-                            background-color: $brown;
-                            text-transform: none;
-                        }
-                    }
-                    .MuiCheckbox-root{
-                        .MuiSvgIcon-root{
-                            fill: $brown;
-                        }
-                    }
+    }
+
+    .MuiBox-root {
+        display: flex;
+        align-self: center;
+
+        .submit {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-self: center;
+            color: $dark_pink;
+            align-items: center;
+            margin: 2%;
+            padding: 2%;
+
+            .MuiTypography-root {
+                font-family: Poppins;
+                font-size: 1.0em;
+
+                @media screen and (max-width: 991px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 576px) {
+                    font-size: 0.8em;
+                }
+
+            }
+
+            .MuiButtonBase-root {
+                width: fit-content;
+                text-transform: none;
+                color: $white;
+                font-family: Poppins;
+                background-color: $dark_pink;
+                font-size: 1.0em;
+                margin: 2%;
+
+                @media screen and (max-width: 991px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 0.8em;
+                }
+
+                @media screen and (max-width: 576px) {
+                    font-size: 0.7em;
                 }
             }
         }

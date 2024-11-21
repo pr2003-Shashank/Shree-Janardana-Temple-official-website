@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography, Divider, Box, List, ListItem, ListItemText, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import './footer.scss';
 
 function Footer() {
@@ -55,12 +56,12 @@ function Footer() {
                     </div>
                     <div className="button_container">
                         <div className="booking_button">
-                        <Button
-                            onClick={(e) => {
-                                navigate('/booking')
-                            }}
-                        >Book a function
-                        </Button>
+                            <Button
+                                onClick={(e) => {
+                                    navigate('/booking')
+                                }}
+                            >Book a Function
+                            </Button>
                         </div>
                         <List component="nav" aria-label="main mailbox folders">
                             <ListItem >
@@ -71,12 +72,20 @@ function Footer() {
                             </ListItem>
                         </List>
                     </div>
-                    <Divider
-                        orientation='horizontal'
-                        flexItem
-                        className='footer_divider'
-                    />
                 </div>
+                <Divider
+                    orientation='horizontal'
+                    flexItem
+                    className='footer_divider'
+                />
+                <Button
+                    endIcon={<ExitToAppIcon />}
+                    onClick={(e)=>
+                        navigate('/dashboard')
+                    }
+                >
+                    Admin Login
+                </Button>
             </Box>
         </div>
     )
