@@ -153,7 +153,6 @@
                         height: fit-content;
                         font-family: Poppins;
                         font-size: 1.0em;
-                        font-family: Poppins;
 
                         @media screen and (max-width: 991px) {
                             font-size: 0.9em;
@@ -193,7 +192,6 @@
                                 font-family: Poppins;
                                 font-size: 0.9em;
                                 color: $yellow;
-                                font-family: Poppins;
 
                                 @media screen and (max-width: 991px) {
                                     font-size: 0.9em;
@@ -230,6 +228,7 @@
         }
         .MuiButtonBase-root{
             display: flex;
+            font-family: Poppins;
             color: $white;
             font-size:0.7em;
             padding-left: 2%;

@@ -1,0 +1,106 @@
+@import '../color.scss';
+@import '../assets/fonts/fonts.scss';
+
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $white;
+
+    .calendar-wrapper {
+        width: 100%;
+
+        .rbc-calendar {
+
+            .rbc-toolbar {
+                background-color: $dark_pink;
+                color: $white;
+                padding: 10px;
+                font-family: Poppins;
+                font-size: 1.0em;
+
+                @media screen and (max-width: 991px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 0.8em;
+                }
+
+                @media screen and (max-width: 576px) {
+                    font-size: 0.8em;
+                }
+
+                .rbc-btn-group button {
+                    color: $white;
+                    background-color: $dark_pink;
+                    font-family: Poppins;
+                    font-size: 0.9em;
+
+                    @media screen and (max-width: 991px) {
+                        font-size: 0.9em;
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        font-size: 0.8em;
+                    }
+
+                    @media screen and (max-width: 576px) {
+                        font-size: 0.8em;
+                    }
+
+                    &:hover {
+                        background-color: $white;
+                        color: $dark_pink;
+                    }
+                }
+            }
+
+            .rbc-month-view {
+                .rbc-month-header{
+                    font-family: Poppins;
+                    font-size: 1.0em;
+    
+                    @media screen and (max-width: 991px) {
+                        font-size: 0.9em;
+                    }
+    
+                    @media screen and (max-width: 768px) {
+                        font-size: 0.8em;
+                    }
+    
+                    @media screen and (max-width: 576px) {
+                        font-size: 0.8em;
+                    }
+                    }
+                .rbc-date-cell {
+                    font-family: Poppins;
+                }
+
+                .rbc-event {
+                    background-color: $dark_pink;
+                    color: $white;
+                    width: 100%;
+                    font-family: Poppins;
+                    font-size: 0.9em;
+
+                    @media screen and (max-width: 991px) {
+                        font-size: 0.9em;
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        font-size: 0.8em;
+                    }
+
+                    @media screen and (max-width: 576px) {
+                        font-size: 0.8em;
+                    }
+
+                    &:hover {
+                        background-color: $dark_pink;
+                    }
+                }
+            }
+        }
+    }
+}

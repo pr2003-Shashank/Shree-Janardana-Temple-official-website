@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button,Box,Paper,Typography } from "@mui/material";
+import { Button, Box, Paper, Typography } from "@mui/material";
 import './quotation.scss';
 import { useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -18,6 +18,7 @@ function Quotation() {
   const navigate = useNavigate();
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const [pdfUrl, setPdfUrl] = useState(); // State to store the PDF URL
+  const [isLoading,setIsLoading] = useState(false);
   const getDefaultScale = () => {
     const screenWidth = window.innerWidth;
 
@@ -85,7 +86,7 @@ function Quotation() {
 
       // Send the data to Apps Script
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbxVHBBLROyB2xY7huaNcy51r7tIYr02KTMgtUqrqwWigZWhhM33eeTjPpmI5JBkh33C/exec", // Replace YOUR_SCRIPT_ID with your Apps Script Deployment ID
+        "https://script.google.com/macros/s/AKfycbxVHBBLROyB2xY7huaNcy51r7tIYr02KTMgtUqrqwWigZWhhM33eeTjPpmI5JBkh33C/exec", // Apps Script Deployment ID
         {
           method: "POST",
           // headers: { "Content-Type": "application/json" },
@@ -95,11 +96,11 @@ function Quotation() {
 
       const result = await response.json();
       if (result.status === "success") {
-        alert("Successfully sent!");
+        setIsLoading(false);
         sessionStorage.clear();
         navigate('/quotation');
       } else {
-        alert(`Failed to send data: ${result.message}`);
+        alert(`Failed booking your function: ${result.message}`);
       }
     } catch (error) {
       console.error("Error submitting data:", error);
@@ -142,9 +143,12 @@ function Quotation() {
                 className="confirm_btn"
                 variant="contained"
                 sx={{ m: 1 }}
-                onClick={handleSubmit}
+                onClick={(e)=>{
+                  setIsLoading(true);
+                  handleSubmit()
+                }}
               >
-                Confirm your booking
+                {isLoading ? <CircularProgress color='#970747' /> : 'Confirm Booking'}
               </Button>
             </div>
           </>
@@ -155,32 +159,32 @@ function Quotation() {
 
       ) : (
         <Box
-                sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    '& > :not(style)': {
-                        m: 1,
-                        width: 575,
-                    },
-                }}
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+              m: 1,
+              width: 575,
+            },
+          }}
+        >
+          <Paper
+            elevation={10}
+            className="submit"
+          >
+            <Typography>
+              Your booking is confirmed. Thank you!!!1
+            </Typography>
+            <Button
+              variant="contained"
+              onClick={(e) =>
+                navigate('/home')
+              }
             >
-                <Paper
-                    elevation={10}
-                    className="submit"
-                >
-                    <Typography>
-                        Your booking is confirmed. Thank you!!!1
-                    </Typography>
-                    <Button
-                        variant="contained"
-                        onClick={(e) =>
-                            navigate('/home')
-                        }
-                    >
-                        Back to Home
-                    </Button>
-                </Paper>
-            </Box>
+              Back to Home
+            </Button>
+          </Paper>
+        </Box>
       )}
     </div>
   );

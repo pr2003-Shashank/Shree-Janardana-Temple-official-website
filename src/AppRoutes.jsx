@@ -4,7 +4,11 @@ import Home from "./pages/home.jsx";
 import ItemSelector from "./pages/items.jsx";
 import Booking from "./pages/booking.jsx";
 import Quotation from "./pages/quotation.jsx";
-import Dashboard from "./pages/dashboard.jsx";
+import DashboardLayout from "./layouts/DashboardLayout.jsx";
+import CalendarView from "./pages/calendarView.jsx";
+import FunctionsView from "./pages/functionsView.jsx";
+import GetDetails from "./pages/getDetails.jsx";
+
 
 function AppRoutes(props) {
     return (
@@ -16,7 +20,12 @@ function AppRoutes(props) {
                     <Route path="/booking" element={<Booking />} />
                     <Route path="/items" element={<ItemSelector />} />
                     <Route path="/quotation" element={<Quotation />} />
-                    <Route path="/dashboard" element={<Dashboard/>} />
+                    <Route path="/getDetails" element={<GetDetails/>}/>
+                </Route>
+                <Route path="/admin" element={<DashboardLayout />}>
+                    <Route path='' element={<Navigate to="/admin/calendar" />} />
+                    <Route path="/admin/calendar" element={<CalendarView />} />
+                    <Route path="/admin/functions" element={<FunctionsView/>} />
                 </Route>
             </Routes>
         </>

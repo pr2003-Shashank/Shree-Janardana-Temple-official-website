@@ -25,7 +25,6 @@ function Header() {
                             Shree Janardana Temple
                         </Typography>
                         <Button 
-                        autoCapitalize="none"
                         onClick={(e) => {
                             navigate('/booking')
                         }}

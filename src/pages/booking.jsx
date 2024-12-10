@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, TextField, Paper, Button, Box } from "@mui/material";
+import { Typography, TextField, Paper, Button, Box, Link } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Papa from 'papaparse'; // CSV parsing library
@@ -67,7 +67,7 @@ function Booking() {
         const newErrors = { ...formErrors };
 
         if (email.trim() === "") {
-            newErrors.email = "Email is required";
+            newErrors.email = "";
         } else if (!/^\S+@\S+\.\S+$/.test(email)) {
             newErrors.email = "Enter a valid email address";
         } else {
@@ -129,7 +129,7 @@ function Booking() {
 
         // Validation for Email
         if (formData.email.trim() === "") {
-            newErrors.email = "Email is required";
+            newErrors.email = "";
         } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
             newErrors.email = "Enter a valid email address";
         } else {
@@ -186,7 +186,7 @@ function Booking() {
     };
     return (
         <div className="booking_form">
-            {sessionStorage.length!==0 ? (
+            {sessionStorage.getItem("formData") ? (
                 <Box
                 sx={{
                     display: 'flex',
@@ -233,7 +233,7 @@ function Booking() {
                         >
                             <div className="form_container" style={{ marginBottom: '1.5rem' }}>
                                 <div className='form_head'>
-                                    <div className='text_head'>Book A Function</div>
+                                    Book A Function
                                 </div>
                                 <div className="form_fields">
                                     <label className="labels">Name</label>
@@ -321,6 +321,12 @@ function Booking() {
                                 >
                                     Submit
                                 </Button>
+                            </div>
+                            <div className="get_details">
+                                Already booked a function?
+                                <Link href='/getDetails'>
+                                Get details
+                                </Link>
                             </div>
                         </form>
                     </Paper>

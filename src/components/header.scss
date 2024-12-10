@@ -12,9 +12,9 @@
                     display: flex;
                     height: 100px;
                     padding: 1%;
-
                     @media screen and (max-width: 991px) {
                         height: 90px;
+                        max-width: 70px;
                     }
 
                     @media screen and (max-width: 768px) {

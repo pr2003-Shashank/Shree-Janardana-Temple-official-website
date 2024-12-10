@@ -64,25 +64,23 @@
         .MuiPaper-root {
             .form_container {
                 .form_head {
-                    .text_head {
-                        padding: 5%;
-                        text-align: center;
-                        font-family: Poppins;
-                        color: $dark_pink;
-                        font-size: 1.4em;
+                    padding: 5%;
+                    text-align: center;
+                    font-family: Poppins;
+                    color: $dark_pink;
+                    font-size: 1.4em;
 
-                        @media screen and (max-width: 991px) {
-                            font-size: 1.2em;
-                        }
+                    @media screen and (max-width: 991px) {
+                        font-size: 1.2em;
+                    }
 
-                        @media screen and (max-width: 768px) {
-                            font-size: 1.0em;
-                        }
+                    @media screen and (max-width: 768px) {
+                        font-size: 1.0em;
+                    }
 
-                        @media screen and (max-width: 576px) {
-                            font-size: 0.9em;
-                            padding: 30px;
-                        }
+                    @media screen and (max-width: 576px) {
+                        font-size: 0.9em;
+                        padding: 30px;
                     }
                 }
 
@@ -114,6 +112,22 @@
                         display: flex;
                         float: left;
                         width: 72%;
+                        .MuiInputBase-root {
+                            font-family: Poppins;
+                            font-size: 1.0em;
+    
+                            @media screen and (max-width: 991px) {
+                                font-size: 1.0em;
+                            }
+    
+                            @media screen and (max-width: 768px) {
+                                font-size: 0.9em;
+                            }
+    
+                            @media screen and (max-width: 576px) {
+                                font-size: 0.8em;
+                            }
+                        }
                     }
 
                     .error-message {
@@ -138,14 +152,53 @@
             }
 
             .create_request {
-                height: 80px;
-                float: right;
-                padding-right: 20px;
-                justify-content: center;
+                display: flex;
+                padding: 2%;
+                justify-content: flex-end;
 
                 .MuiButtonBase-root {
+                    height: fit-content;
                     background-color: $dark_pink;
+                    font-size: 1.0em;
                     font-family: Poppins;
+
+                    @media screen and (max-width: 991px) {
+                        font-size: 0.9em;
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        font-size: 0.8em;
+                    }
+
+                    @media screen and (max-width: 576px) {
+                        font-size: 0.7em;
+                    }
+                }
+            }
+
+            .get_details {
+                display: flex;
+                justify-content: center;
+                margin: 2%;
+                font-family: Poppins;
+                font-size: 1.0em;
+
+                @media screen and (max-width: 991px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 576px) {
+                    font-size: 0.8em;
+                }
+
+                .MuiLink-root {
+                    padding-left: 1%;
+                    text-decoration: none;
+                    color: $dark_pink;
                 }
             }
         }
