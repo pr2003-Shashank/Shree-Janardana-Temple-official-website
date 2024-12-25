@@ -1,0 +1,96 @@
+@import '../color.scss';
+@import '../assets/fonts/fonts.scss';
+
+.login_container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: $dark_pink;
+    font-family: Poppins;
+    background-color: $white;
+
+    .MuiStack-root {
+        display: flex;
+
+        @media screen and (max-width: 1440px) {
+            width: 30vw;
+        }
+
+        @media screen and (max-width: 1200px) {
+            width: 40vw;
+        }
+
+        @media screen and (max-width: 991px) {
+            width: 60vw;
+        }
+
+        @media screen and (max-width: 768px) {
+            width: 60vw;
+        }
+
+        @media screen and (max-width: 576px) {
+            width: 80vw;
+        }
+
+        .MuiTypography-root {
+            color: $dark_pink;
+            font-size: 1.4em;
+            font-family: Poppins;
+        }
+
+        .logo {
+            display: flex;
+            height: 200px;
+            padding: 1%;
+
+            @media screen and (max-width: 991px) {
+                height: 190px;
+                max-width: 170px;
+            }
+
+            @media screen and (max-width: 768px) {
+                height: 180px;
+                max-width: 160px;
+            }
+
+            @media screen and (max-width: 576px) {
+                height: 170px;
+                max-width: 150px;
+            }
+
+        }
+
+        .MuiFormControl-root {
+            display: flex;
+            width: 100%;
+
+            .MuiFormLabel-root {
+                color: $dark_pink;
+            }
+
+            .MuiButtonBase-root {
+                background-color: transparent;
+            }
+        }
+
+        .forgot_pass {
+            display: flex;
+            justify-content: flex-end;
+
+            .MuiLink-root {
+                font-family: Poppins;
+                text-decoration: none;
+                color: $dark_pink;
+                font-size: 12px;
+                font-family: Poppins;
+            }
+        }
+
+        .MuiButtonBase-root {
+            display: flex;
+            background-color: $dark_pink ;
+            width: 100%;
+        }
+    }
+}

@@ -6,6 +6,149 @@
     display: flex;
     justify-content: center;
 
+    .display_container {
+            width: 90%;
+            margin: 2%;
+            background-color: $white;
+            flex-direction: column;
+            display: flex;
+            
+            .top_container {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                .MuiTypography-root {
+                    display: flex;
+                    color: $dark_pink;
+                    margin: 1%;
+                    font-size: 1.4em;
+                    font-family: Poppins;
+
+                    @media screen and (max-width: 991px) {
+                        font-size: 1.2em;
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        font-size: 1.0em;
+                        padding-left: 2%;
+                    }
+
+                    @media screen and (max-width: 576px) {
+                        font-size: 0.9em;
+                    }
+                }
+            }
+
+            .details_container {
+                display: flex;
+                width: 100%;
+                justify-content: space-evenly;
+
+                @media screen and (max-width: 670px) {
+                    display: block;
+                }
+
+                .list_container {
+                    margin: 20px 40px;
+
+                    @media screen and (max-width: 670px) {
+                        display: block;
+                        margin: 20px auto;
+                    }
+
+                    .list_title {
+                        font-size: 1.2em;
+                        font-family: Poppins;
+                        color: $black;
+
+                        @media screen and (max-width: 991px) {
+                            font-size: 1.0em;
+                        }
+
+                        @media screen and (max-width: 768px) {
+                            font-size: 0.9em;
+                        }
+
+                        @media screen and (max-width: 670px) {
+                            padding-left: 2%;
+                        }
+
+                        @media screen and (max-width: 576px) {
+                            font-size: 0.8em;
+                        }
+                    }
+
+                    .MuiList-root {
+                        @media screen and (max-width: 670px) {
+                            display: block;
+                        }
+
+                        .MuiListItem-root {
+                            padding: 1px;
+                            -webkit-flex-grow: unset;
+                            flex-grow: unset;
+
+                            @media screen and (max-width: 670px) {
+                                padding-left: 2%;
+                            }
+
+                            .MuiButtonBase-root {
+                                background-color: $pink;
+                                color: $dark_pink;
+                                text-transform: none;
+                                height: fit-content;
+                                font-family: Poppins;
+                                font-size: 0.8em;
+    
+                                @media screen and (max-width: 991px) {
+                                    font-size: 0.8em;
+                                }
+    
+                                @media screen and (max-width: 768px) {
+                                    font-size: 0.7em;
+                                }
+    
+                                @media screen and (max-width: 576px) {
+                                    font-size: 0.7em;
+                                }
+    
+                            }
+
+                            .MuiListItemText-root {
+                                margin: 0;
+                                -webkit-flex: unset;
+                                flex: unset;
+
+                                .MuiTypography-root {
+                                    font-size: 0.9em;
+                                    color: $black;
+                                    font-family: Poppins;
+
+                                    @media screen and (max-width: 991px) {
+                                        font-size: 0.9em;
+                                    }
+
+                                    @media screen and (max-width: 768px) {
+                                        font-size: 0.8em;
+                                    }
+
+                                    @media screen and (max-width: 576px) {
+                                        font-size: 0.8em;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .footer_divider {
+                background-color: $white;
+                margin: 1px 15px;
+            }
+    }
+
     .MuiBox-root {
         display: flex;
         width: 100%;
@@ -125,6 +268,7 @@
                     }
                 }
             }
+
             .back_to_booking {
                 display: flex;
                 justify-content: center;

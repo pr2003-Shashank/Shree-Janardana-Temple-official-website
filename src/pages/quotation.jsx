@@ -7,6 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Viewer } from '@react-pdf-viewer/core';
 import { Worker } from '@react-pdf-viewer/core';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 // Import styles
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
@@ -18,7 +19,7 @@ function Quotation() {
   const navigate = useNavigate();
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const [pdfUrl, setPdfUrl] = useState(); // State to store the PDF URL
-  const [isLoading,setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const getDefaultScale = () => {
     const screenWidth = window.innerWidth;
 
@@ -49,6 +50,7 @@ function Quotation() {
   };
   // Fetch stored form data from session storage
   useEffect(() => {
+    fetchPdfBlob();
     const storedFormData = sessionStorage.getItem("formData");
     if (storedFormData) {
       const parsedData = JSON.parse(storedFormData);
@@ -60,8 +62,6 @@ function Quotation() {
         date: parsedData.date || "",
       });
     }
-    fetchPdfBlob();
-
   }, []);
 
   const handleSubmit = async () => {
@@ -111,8 +111,8 @@ function Quotation() {
   return (
     <div className="quotation_container">
       {sessionStorage.length !== 0 ? (
-        pdfUrl ? (
-          <>
+        <>
+          {pdfUrl ? (
             <div className="pdf_preview">
               <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
                 <div className="pdf_viewer">
@@ -124,39 +124,41 @@ function Quotation() {
                 </div>
               </Worker>
             </div>
-            <div className="quotation_actions">
-              <Button
-                className="download_btn"
-                variant="contained"
-                sx={{ m: 1 }}
-                onClick={() => {
-                  const link = document.createElement("a");
-                  link.href = sessionStorage.getItem('pdfBlob');
-                  link.download = "Quotation.pdf";
-                  link.click();
-                }}
-              >
-                Download Quotation
-              </Button>
-              <Typography><span>{formData.name}</span>, please verify the quotation generated. If you have verified then click on confirm to book your function on <span>{formData.date}</span>.</Typography>
-              <Button
-                className="confirm_btn"
-                variant="contained"
-                sx={{ m: 1 }}
-                onClick={(e)=>{
-                  setIsLoading(true);
-                  handleSubmit()
-                }}
-              >
-                {isLoading ? <CircularProgress color='#970747' /> : 'Confirm Booking'}
-              </Button>
+          ) : (
+            <div className="loading">
+              <CircularProgress color="#970747"/>
             </div>
-          </>
-        ) : (
-          <div className="loading">
-            <CircularProgress color='#970747' />
-          </div>)
-
+          )
+          }
+          <div className="quotation_actions">
+            <Button
+              className="download_btn"
+              variant="contained"
+              sx={{ m: 1 }}
+              onClick={() => {
+                const link = document.createElement("a");
+                link.href = sessionStorage.getItem('pdfBlob');
+                link.download = "Quotation.pdf";
+                link.click();
+              }}
+              endIcon={<PictureAsPdfIcon/>}
+            >
+              Download Quotation
+            </Button>
+            <Typography><span>{formData.name}</span>, please verify the quotation generated. If you have verified then click on confirm to book your function for <span>{formData.date}</span>.</Typography>
+            <Button
+              className="confirm_btn"
+              variant="contained"
+              sx={{ m: 1 }}
+              onClick={(e) => {
+                setIsLoading(true);
+                handleSubmit()
+              }}
+            >
+              {isLoading ? <CircularProgress color='#970747' /> : 'Confirm Booking'}
+            </Button>
+          </div>
+        </>
       ) : (
         <Box
           sx={{
@@ -170,10 +172,10 @@ function Quotation() {
         >
           <Paper
             elevation={10}
-            className="submit"
+            className="after_submit"
           >
             <Typography>
-              Your booking is confirmed. Thank you!!!1
+              Your booking is confirmed. Thank you!!!
             </Typography>
             <Button
               variant="contained"

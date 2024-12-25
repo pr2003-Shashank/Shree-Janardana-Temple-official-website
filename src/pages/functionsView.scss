@@ -1,7 +1,209 @@
 @import '../color.scss';
 @import '../assets/fonts/fonts.scss';
 
-.functions-container{
+.functions-container {
     display: flex;
-    
+    justify-content: center;
+
+    .display_container {
+        width: 98%;
+        margin: 1%;
+        background-color: $white;
+        flex-direction: column;
+        display: flex;
+
+        .top_container {
+            display: flex;
+            width: 100%;
+
+            .MuiTypography-root {
+                display: flex;
+                color: $dark_pink;
+                margin: 1%;
+                font-size: 1.4em;
+                font-family: Poppins;
+
+                @media screen and (max-width: 991px) {
+                    font-size: 1.2em;
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 1.0em;
+                    padding-left: 2%;
+                }
+
+                @media screen and (max-width: 576px) {
+                    font-size: 0.9em;
+                }
+            }
+        }
+
+        .MuiAccordion-root {
+            .MuiButtonBase-root {
+                .MuiAccordionSummary-content {
+                    .panel_index {
+                        display: flex;
+                        height: fit-content;
+                        width: 1.4em;
+                        border-radius: 50%;
+                        background-color: $dark_pink;
+                        color: $white;
+                        justify-content: center;
+                        font-size: 1.2em;
+                        font-family: Poppins;
+                        margin: 1%;
+
+                        @media screen and (max-width: 991px) {
+                            font-size: 1.0em;
+                        }
+
+                        @media screen and (max-width: 768px) {
+                            font-size: 0.9em;
+                        }
+
+                        @media screen and (max-width: 670px) {
+                            padding-left: 2%;
+                        }
+
+                        @media screen and (max-width: 576px) {
+                            font-size: 0.8em;
+                        }
+                    }
+
+                    .panel_header {
+                        color: $dark_pink;
+                        justify-content: center;
+                        font-size: 1.2em;
+                        font-family: Poppins;
+                        margin: 1%;
+
+                        @media screen and (max-width: 991px) {
+                            font-size: 1.0em;
+                        }
+
+                        @media screen and (max-width: 768px) {
+                            font-size: 0.9em;
+                        }
+
+                        @media screen and (max-width: 576px) {
+                            font-size: 0.8em;
+                        }
+
+                    }
+
+                }
+            }
+        }
+
+        .details_container {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-content: center;
+
+            @media screen and (max-width: 670px) {
+                display: block;
+            }
+
+            .list_container {
+                width: 30%;
+                margin: 1%;
+
+                @media screen and (max-width: 670px) {
+                    width: auto;
+                }
+
+                .list_title {
+                    font-size: 1.2em;
+                    font-family: Poppins;
+                    color: $black;
+
+                    @media screen and (max-width: 991px) {
+                        font-size: 1.0em;
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        font-size: 0.9em;
+                    }
+
+                    @media screen and (max-width: 670px) {
+                        padding-left: 2%;
+                    }
+
+                    @media screen and (max-width: 576px) {
+                        font-size: 0.8em;
+                    }
+                }
+
+                .MuiList-root {
+                    @media screen and (max-width: 670px) {
+                        display: block;
+                    }
+
+                    .MuiListItem-root {
+                        padding: 1px;
+                        -webkit-flex-grow: unset;
+                        flex-grow: unset;
+
+                        @media screen and (max-width: 670px) {
+                            padding-left: 2%;
+                        }
+
+                        .MuiButtonBase-root {
+                            background-color: $pink;
+                            color: $dark_pink;
+                            text-transform: none;
+                            height: fit-content;
+                            font-family: Poppins;
+                            font-size: 0.8em;
+
+                            @media screen and (max-width: 991px) {
+                                font-size: 0.8em;
+                            }
+
+                            @media screen and (max-width: 768px) {
+                                font-size: 0.7em;
+                            }
+
+                            @media screen and (max-width: 576px) {
+                                font-size: 0.7em;
+                            }
+
+                        }
+
+                        .MuiListItemText-root {
+                            margin: 0;
+                            -webkit-flex: unset;
+                            flex: unset;
+
+                            .MuiTypography-root {
+                                font-size: 0.9em;
+                                color: $black;
+                                font-family: Poppins;
+
+                                @media screen and (max-width: 991px) {
+                                    font-size: 0.9em;
+                                }
+
+                                @media screen and (max-width: 768px) {
+                                    font-size: 0.8em;
+                                }
+
+                                @media screen and (max-width: 576px) {
+                                    font-size: 0.8em;
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            .divider {
+                background-color: $dark_pink;
+                margin: 1px 15px;
+            }
+        }
+    }
+
 }

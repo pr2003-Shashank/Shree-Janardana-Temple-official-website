@@ -202,8 +202,7 @@ function Booking() {
                     className="after_submit"
                 >
                     <Typography>
-                        Your booking has been initiated. Please proceed to select the items and get the quotation to confirm your booking.
-                    </Typography>
+                    Your booking has been initiated. Please proceed to select the food items and obtain the quotation to complete your booking.                    </Typography>
                     <Button
                         variant="contained"
                         onClick={(e) =>

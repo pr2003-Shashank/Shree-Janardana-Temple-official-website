@@ -4,6 +4,7 @@
 .quotation_container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 
     .pdf_preview {
         display: flex;
@@ -104,13 +105,12 @@
 
     .MuiBox-root {
         display: flex;
-        align-self: center;
+        width: 100%;
+        justify-content: center;
 
-        .submit {
+        .after_submit {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-self: center;
             color: $dark_pink;
             align-items: center;
             margin: 2%;

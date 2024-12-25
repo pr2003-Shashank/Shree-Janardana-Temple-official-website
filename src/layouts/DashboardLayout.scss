@@ -1,2 +1,74 @@
 @import '../color.scss';
 @import '../assets/fonts/fonts.scss';
+
+.MuiBox-root {
+    .MuiPaper-root {
+        background-color: $white;
+
+        .MuiToolbar-root {
+            .MuiButtonBase-root {
+                .MuiSvgIcon-root {
+                    color: $dark_pink;
+                }
+            }
+
+            .MuiTypography-root {
+                color: $dark_pink;
+                font-size: 1.4em;
+                font-family: Poppins;
+
+                @media screen and (max-width: 991px) {
+                    font-size: 1.2em;
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 1.0em;
+                }
+
+                @media screen and (max-width: 576px) {
+                    font-size: 0.9em;
+                }
+
+            }
+        }
+    }
+
+    .MuiDrawer-root {
+        .MuiPaper-root {
+            .MuiList-root {
+                font-family: Poppins;
+                color: $dark_pink;
+
+                .MuiButtonBase-root {
+                    .MuiListItemIcon-root {
+                        .MuiSvgIcon-root {
+                            color: $dark_pink;
+                        }
+                    }
+
+                    .MuiListItemText-root {
+                        .MuiTypography-root {
+                            font-size: 1.2em;
+                            color: $dark_pink;
+                            font-family: Poppins;
+
+                            @media screen and (max-width: 991px) {
+                                font-size: 1.0em;
+                            }
+
+                            @media screen and (max-width: 768px) {
+                                font-size: 0.9em;
+                            }
+
+                            @media screen and (max-width: 576px) {
+                                font-size: 0.8em;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+}

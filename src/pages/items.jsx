@@ -96,9 +96,39 @@ function ItemSelector() {
   };
 
   const handleSubmit = async () => {
-    // sessionStorage.setItem('selectedItems',JSON.stringify(selecteditems));
+    // Generate the PDF
     generatePDF();
-    navigate('/quotation');
+  
+    // Function to check for the pdfBlob item
+    const waitForPdfBlob = async () => {
+      const timeout = 5000; // Maximum wait time in milliseconds
+      const interval = 100; // Interval time to check in milliseconds
+      let waited = 0;
+  
+      return new Promise((resolve, reject) => {
+        const checkBlob = () => {
+          if (sessionStorage.getItem('pdfBlob')) {
+            resolve(); // Resolve the promise if pdfBlob is found
+          } else if (waited >= timeout) {
+            reject(new Error("PDF generation timed out."));
+          } else {
+            waited += interval;
+            setTimeout(checkBlob, interval); // Retry after the interval
+          }
+        };
+        checkBlob();
+      });
+    };
+  
+    try {
+      // Wait for the pdfBlob to be set in sessionStorage
+      await waitForPdfBlob();
+      // Navigate to the quotation page once pdfBlob exists
+      navigate('/quotation');
+    } catch (error) {
+      console.error(error.message);
+      alert("PDF generation failed or timed out. Please try again.");
+    }
   };
 
   // Generate PDF and update the state
@@ -110,7 +140,7 @@ function ItemSelector() {
 
     // Add title
     doc.setFontSize(16);
-    doc.setFont("helvetica", "bold"); // Set font family and style
+    doc.setFont("helvetica"); // Set font family and style
     doc.text("Aryadi Shree Janardana Temple Pangala", 105, 20, null, null, "center");
 
     // Add user information

@@ -1,20 +1,18 @@
 import React from "react";
-import { Button, TextField, Paper, Box, Link } from "@mui/material";
+import { Button, TextField, Paper, Typography, Divider, Box, List, ListItem, ListItemText, Link } from "@mui/material";
 import './getDetails.scss';
 import { useState } from "react";
 import Papa from 'papaparse'; // CSV parsing library
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+// import { useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 function GetDetails() {
 
     const [functions, setFunctions] = useState([]);
-    const [isLoading,setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    // const navigate = useNavigate();
 
     const baseSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRuWARY0Y8KpEDf7LCiMwg1cSNht-Jp_VcPj5cFr5P6DIDVVtddyenn89OKwu7Guc3x5KIAuQa7gnIa/pub?gid=319284677&single=true&output=csv';
     const fetchData = (name, phone) => {
@@ -47,7 +45,7 @@ function GetDetails() {
                     },
                 });
             })
-            .catch((error) => { 
+            .catch((error) => {
                 console.error("Error fetching or parsing data:", error);
                 setIsLoading(false);
             });
@@ -128,58 +126,82 @@ function GetDetails() {
     };
     return (
         <div className="getDetails_container">
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    '& > :not(style)': {
-                        m: 1,
-                        width: 575,
-                    },
-                }}
-            >
-                {functions.length > 0
-                    ?
-                    <TableContainer component={Paper} className="table_view">
-                        <Table aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Name</TableCell>
-                                    <TableCell align="right">Date</TableCell>
-                                    <TableCell align="right">Number of people</TableCell>
-                                    <TableCell align="right">Quotation</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {functions.map((row) => (
-                                    <TableRow
-                                        key={row.Name}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell component="th" scope="row">{row.Name}</TableCell>
-                                        <TableCell align="right">{row.Date}</TableCell>
-                                        <TableCell align="right">{row["Number of people"]}</TableCell>
-                                        <TableCell align="right">
-                                            <Button
-                                                onClick={() => window.open(row.Quotation, '_blank')}
-                                                style={{
-                                                    padding: '5px 10px',
-                                                    backgroundColor: '#1976d2',
-                                                    color: 'white',
-                                                    border: 'none',
-                                                    borderRadius: '5px',
-                                                    cursor: 'pointer'
-                                                }}
-                                            >
-                                                Open PDF
-                                            </Button>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                    :
+            {functions.length > 0 ?
+                <Paper elevation={10} className="display_container">
+                    <div className="top_container">
+                        <Typography>View Booking Details</Typography>
+                    </div>
+                    {functions.map((row) => (
+                        <div className="details_container">
+                            <div className="list_container">
+                                <Typography className='list_title'><strong>Contact info</strong></Typography>
+                                <List component="nav" aria-label="main mailbox folders">
+                                    <ListItem >
+                                        <ListItemText>
+                                            <strong>Name:</strong> {row.Name}
+                                        </ListItemText>
+                                    </ListItem>
+                                    <ListItem >
+                                        <ListItemText>
+                                            <strong>Phone no:</strong> {row['Phone number']}
+                                        </ListItemText>
+                                    </ListItem>
+                                    <ListItem >
+                                        <ListItemText>
+                                            <strong>Email</strong>: {row['Email address'] || 'NA'}
+                                        </ListItemText>
+                                    </ListItem>
+                                    <ListItem >
+                                        <ListItemText>
+                                            <strong>No. of People</strong>: {row['Number of people'] || 'NA'}
+                                        </ListItemText>
+                                    </ListItem>
+                                </List>
+                            </div>
+                            <div className="list_container">
+                                <Typography className='list_title'><strong>Date</strong></Typography>
+                                <List component="nav" aria-label="main mailbox folders">
+                                    <ListItem >
+                                        <ListItemText>
+                                            {row.Date}
+                                        </ListItemText>
+                                    </ListItem>
+                                </List>
+                            </div>
+                            <div className="list_container">
+                                <Typography className='list_title'><strong>Quotation</strong></Typography>
+                                <List component="nav" aria-label="main mailbox folders">
+                                    <ListItem >
+                                        <Button
+                                            onClick={() => window.open(row.Quotation, '_blank')}
+                                            endIcon={<PictureAsPdfIcon />}
+                                        >
+                                            View Quotation
+                                        </Button>
+                                    </ListItem>
+                                </List>
+                            </div>
+                        </div>
+                    )
+                    )
+                    }
+                    <Divider
+                        orientation='horizontal'
+                        flexItem
+                        className='footer_divider'
+                    />
+                </Paper>
+                :
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        '& > :not(style)': {
+                            m: 1,
+                            width: 575,
+                        },
+                    }}
+                >
                     <Paper
                         elevation={10}
                     >
@@ -220,12 +242,12 @@ function GetDetails() {
                         </div>
                         <div className="get_details">
                             <Button variant="contained"
-                                onClick={(e)=>{
+                                onClick={(e) => {
                                     handleSubmit(e);
                                 }}
                                 type='submit'
                             >
-                                {isLoading?<CircularProgress color='#970747' />:'Get Details'}
+                                {isLoading ? <CircularProgress color='#970747' /> : 'Get Details'}
                             </Button>
                         </div>
                         <div className="back_to_booking">
@@ -235,8 +257,8 @@ function GetDetails() {
                             </Link>
                         </div>
                     </Paper>
-                }
-            </Box>
+                </Box>
+            }
         </div>
     )
 }

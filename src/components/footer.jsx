@@ -81,7 +81,7 @@ function Footer() {
                 <Button
                     endIcon={<ExitToAppIcon />}
                     onClick={(e)=>
-                        window.open('/admin')
+                        window.open('/login')
                     }
                 >
                     Admin Login
