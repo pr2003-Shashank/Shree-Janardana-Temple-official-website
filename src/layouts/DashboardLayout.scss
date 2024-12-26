@@ -47,23 +47,23 @@
                     }
 
                     .MuiListItemText-root {
-                        .MuiTypography-root {
-                            font-size: 1.2em;
-                            color: $dark_pink;
-                            font-family: Poppins;
+                        .MuiTypography-root{
+                        font-size: 1.0em;
+                        color: $dark_pink;
+                        font-family: Poppins;
 
-                            @media screen and (max-width: 991px) {
-                                font-size: 1.0em;
-                            }
-
-                            @media screen and (max-width: 768px) {
-                                font-size: 0.9em;
-                            }
-
-                            @media screen and (max-width: 576px) {
-                                font-size: 0.8em;
-                            }
+                        @media screen and (max-width: 991px) {
+                            font-size: 0.9em;
                         }
+
+                        @media screen and (max-width: 768px) {
+                            font-size: 0.8em;
+                        }
+
+                        @media screen and (max-width: 576px) {
+                            font-size: 0.7em;
+                        }
+                    }
                     }
                 }
             }

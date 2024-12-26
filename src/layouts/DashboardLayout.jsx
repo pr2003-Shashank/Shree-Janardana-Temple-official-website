@@ -195,7 +195,7 @@ function DashboardLayout() {
                     <ListItem disablePadding sx={{ display: "block" }}>
                         <ListItemButton
                             onClick={() => {
-                                navigate('functions');
+                                navigate('staff');
                             }
                             }
                             sx={{
