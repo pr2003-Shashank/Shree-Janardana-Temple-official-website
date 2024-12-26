@@ -5,6 +5,118 @@
     display: flex;
     justify-content: center;
 
+    .sweets_quantity {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        padding: 2%;
+        margin: 2%;
+        color: $dark_pink;
+        font-family: Poppins;
+        background-color: $white;
+
+        @media screen and (max-width: 991px) {
+            width: 70%;
+        }
+
+        @media screen and (max-width: 768px) {
+            width: 80%;
+        }
+
+        @media screen and (max-width: 575px) {
+            width: 100%;
+        }
+
+        .helper_text {
+            margin: 2%;
+            font-size: 1.0em;
+            font-family: Poppins;
+
+            @media screen and (max-width: 991px) {
+                font-size: 0.9em;
+            }
+
+            @media screen and (max-width: 768px) {
+                font-size: 0.8em;
+            }
+
+            @media screen and (max-width: 576px) {
+                font-size: 0.8em;
+            }
+        }
+
+        .sweet_item {
+            display: flex;
+            flex-direction: row;
+
+            .sweet_name {
+                display: flex;
+                width: 50%;
+                margin-left: 2%;
+                align-items: center;
+                font-size: 1.0em;
+                font-family: Poppins;
+
+                @media screen and (max-width: 991px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 0.8em;
+                }
+
+                @media screen and (max-width: 576px) {
+                    font-size: 0.8em;
+                }
+            }
+
+            .quantity_controls {
+                display: flex;
+                width: 50%;
+                justify-content: center;
+
+                .MuiButtonBase-root {
+                    display: flex;
+                    background-color: rgb(201, 201, 201);
+                    color: $dark_pink;
+                    font-family: Poppins;
+                    min-width: 45px;
+                    margin: 2px;
+                    height: fit-content;
+                }
+
+                .input_quantity {
+                    display: flex;
+                    width: 60px;
+                    height: 37px;
+                    margin: 2px 0 2px 0;
+                }
+            }
+        }
+
+        .submit {
+            display: flex;
+            background-color: $dark_pink;
+            color: $white;
+            margin: 2%;
+            font-size: 1.0em;
+            font-family: Poppins;
+            text-decoration: none;
+
+            @media screen and (max-width: 991px) {
+                font-size: 0.9em;
+            }
+
+            @media screen and (max-width: 768px) {
+                font-size: 0.8em;
+            }
+
+            @media screen and (max-width: 576px) {
+                font-size: 0.8em;
+            }
+        }
+    }
+
     .items_selector_container {
         display: flex;
         flex-direction: column;
@@ -32,6 +144,62 @@
 
             * {
                 font-family: inherit; // Use the inherited font-family property
+            }
+
+            .helper_text {
+                margin: 2%;
+                font-size: 1.0em;
+                font-family: Poppins;
+
+                @media screen and (max-width: 991px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 0.8em;
+                }
+
+                @media screen and (max-width: 576px) {
+                    font-size: 0.8em;
+                }
+            }
+
+            .MuiPaper-root {
+                .MuiTypography-root {
+                    margin: 2%;
+                    font-size: 1.0em;
+                    font-family: Poppins;
+
+                    @media screen and (max-width: 991px) {
+                        font-size: 0.9em;
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        font-size: 0.8em;
+                    }
+
+                    @media screen and (max-width: 576px) {
+                        font-size: 0.8em;
+                    }
+                }
+
+                .MuiButtonBase-root {
+                    font-size: 1.0em;
+                    font-family: Poppins;
+
+                    @media screen and (max-width: 991px) {
+                        font-size: 0.9em;
+                    }
+
+                    @media screen and (max-width: 768px) {
+                        font-size: 0.8em;
+                    }
+
+                    @media screen and (max-width: 576px) {
+                        font-size: 0.8em;
+                    }
+
+                }
             }
 
             .MuiStepper-root {

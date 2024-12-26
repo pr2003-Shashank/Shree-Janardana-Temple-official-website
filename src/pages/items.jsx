@@ -21,6 +21,8 @@ function ItemSelector() {
   const [items, setItems] = useState([]);
   const [activeStep, setActiveStep] = useState(0);
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
+  const [done, setDone] = useState(false);
+  const [sweets, setSweets] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -95,40 +97,66 @@ function ItemSelector() {
     setActiveStep((prev) => prev - 1);
   };
 
+  const handleDone = () => {
+    const selectedItems = rowSelectionModel.map((select) => items[select - 1]);
+    sessionStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+
+    // Filter items with category 'sweets'
+    const selectedSweets = selectedItems.filter((item) => item.Category === 'Sweet');
+    setSweets(selectedSweets);
+    setDone(true);
+  }
+
+  // Handle quantity change
+  const updateQuantity = (itemId, newQuantity) => {
+    setSweets((prevSweets) =>
+      prevSweets.map((sweet) =>
+        sweet['Item Id'] === itemId ? { ...sweet, Quantity: newQuantity } : sweet
+      )
+    );
+
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item['Item Id'] === itemId ? { ...item, Quantity: newQuantity } : item
+      )
+    );
+  };
+
   const handleSubmit = async () => {
     // Generate the PDF
     generatePDF();
-  
-    // Function to check for the pdfBlob item
-    const waitForPdfBlob = async () => {
-      const timeout = 5000; // Maximum wait time in milliseconds
-      const interval = 100; // Interval time to check in milliseconds
-      let waited = 0;
-  
-      return new Promise((resolve, reject) => {
-        const checkBlob = () => {
-          if (sessionStorage.getItem('pdfBlob')) {
-            resolve(); // Resolve the promise if pdfBlob is found
-          } else if (waited >= timeout) {
-            reject(new Error("PDF generation timed out."));
-          } else {
-            waited += interval;
-            setTimeout(checkBlob, interval); // Retry after the interval
-          }
-        };
-        checkBlob();
-      });
-    };
-  
-    try {
-      // Wait for the pdfBlob to be set in sessionStorage
-      await waitForPdfBlob();
-      // Navigate to the quotation page once pdfBlob exists
-      navigate('/quotation');
-    } catch (error) {
-      console.error(error.message);
-      alert("PDF generation failed or timed out. Please try again.");
-    }
+    navigate('/quotation');
+
+    // // Function to check for the pdfBlob item
+    // const waitForPdfBlob = async () => {
+    //   const timeout = 5000; // Maximum wait time in milliseconds
+    //   const interval = 100; // Interval time to check in milliseconds
+    //   let waited = 0;
+
+    //   return new Promise((resolve, reject) => {
+    //     const checkBlob = () => {
+    //       if (sessionStorage.getItem('pdfBlob')) {
+    //         resolve(); // Resolve the promise if pdfBlob is found
+    //       } else if (waited >= timeout) {
+    //         reject(new Error("PDF generation timed out."));
+    //       } else {
+    //         waited += interval;
+    //         setTimeout(checkBlob, interval); // Retry after the interval
+    //       }
+    //     };
+    //     checkBlob();
+    //   });
+    // };
+
+    // try {
+    //   // Wait for the pdfBlob to be set in sessionStorage
+    //   await waitForPdfBlob();
+    //   // Navigate to the quotation page once pdfBlob exists
+    //   navigate('/quotation');
+    // } catch (error) {
+    //   console.error(error.message);
+    //   alert("PDF generation failed or timed out. Please try again.");
+    // }
   };
 
   // Generate PDF and update the state
@@ -146,9 +174,11 @@ function ItemSelector() {
     // Add user information
     doc.setFontSize(12);
     doc.text("To,", 20, 50);
-    doc.text(formData.name || "N/A", 20, 55);
-    doc.text(formData.email || "N/A", 20, 60);
-    doc.text(formData.phone || "N/A", 20, 65);
+    doc.text(`Name : ${formData.name || "N/A"}`, 20, 55);
+    doc.text(`Email :${formData.email || "N/A"}`, 20, 60);
+    doc.text(`Phone no: ${formData.phone || "N/A"}`, 20, 65);
+    doc.text(`Date: ${formData.date || "N/A"}`, 155, 55);
+    doc.text(`No. of people: ${formData.people || "N/A"}`, 155, 60);
 
     //Items selected
     const selectedItems = rowSelectionModel.map((select) => items[select - 1]);
@@ -157,13 +187,14 @@ function ItemSelector() {
     const tableData = selectedItems.map((item, index) => [
       index + 1, // Serial Number
       item["Item Name"] || "N/A", // Item Name
-      item["Category"] || "N/A"
+      item["Price"] || "N/A",
+      item["Quantity"] || "N/A"
     ]);
 
     // Add the table using autoTable
     autoTable(doc, {
       startY: 75, // Start position below the title
-      head: [["#", "Item Name", "Category"]],
+      head: [["#", "Item Name", "Price", "Quantity"]],
       body: tableData,
       headStyles: {
         fillColor: '#970747', // Header background color (RGB: Blue)
@@ -207,64 +238,111 @@ function ItemSelector() {
 
   return (
     <div className='items_container'>
-      <Paper elevation={10} className='items_selector_container'>
-        <Box>
-          <Stepper activeStep={activeStep} orientation="vertical">
-            {steps.map((step, index) => (
-              <Step key={step.label}>
-                <StepLabel>{step.label}</StepLabel>
-                <StepContent>
-                  <Paper sx={{ height: 400, width: '100%' }}>
-                    <DataGrid
-                      rows={step.rows}
-                      columns={[
-                        { field: 'id', headerName: 'ID', width: 60 },
-                        { field: 'itemName', headerName: 'Item Name', width: 200 }
-                      ]}
-                      initialState={{ pagination: { paginationModel } }}
-                      pageSizeOptions={[5, 10]}
-                      checkboxSelection
-                      onRowSelectionModelChange={(selectedIds) =>
-                        setRowSelectionModel(selectedIds)
-                      }
-                      rowSelectionModel={rowSelectionModel}
-                      sx={{ border: 0 }}
-                    />
-                  </Paper>
-                  <Box sx={{ mb: 2 }}>
-                    <Button
-                      className='btn1'
-                      variant="contained"
-                      onClick={handleNext}
-                      sx={{ mt: 1, mr: 1 }}
-                    >
-                      {index === steps.length - 1 ? 'Finish' : 'Next'}
-                    </Button>
-                    <Button
-                      className='btn2'
-                      disabled={index === 0}
-                      onClick={handleBack}
-                      sx={{ mt: 1, mr: 1 }}
-                    >
-                      Prev
-                    </Button>
-                  </Box>
-                </StepContent>
-              </Step>
-            ))}
-          </Stepper>
-          {steps.length !== 0 ? (
-            activeStep === steps.length && (
-              <Paper square elevation={0} sx={{ p: 3 }}>
-                <Typography>If you have completed, click on done</Typography>
-                <Button style={{ color: "#970747" }} onClick={handleSubmit} sx={{ mt: 1, mr: 1 }}>
-                  Done
+      {done ? (
+        <Paper elevation={10} className="sweets_quantity">
+          <Typography component='div' className='helper_text'>
+            You have selected the following sweets. Please set the quantity of the sweets (no. of pieces).
+          </Typography>
+          {sweets.map((row) => (
+            <Box key={row['Item Id']} className="sweet_item">
+              <Typography className='sweet_name' component='div'>{row['Item Name']}</Typography>
+              <div className="quantity_controls">
+                <Button
+                  onClick={() =>
+                    updateQuantity(row['Item Id'], (row.Quantity || parseInt(formData.people)) - 10 > parseInt(formData.people) ? row.Quantity - 10 : parseInt(formData.people))
+                  }
+                >
+                  -
                 </Button>
-              </Paper>
-            )
-          ) : (<div className='loading' ><CircularProgress color='#970747' /></div>)}
-        </Box>
-      </Paper>
+                <input
+                  type="number"
+                  value={row.Quantity || parseInt(formData.people)}
+                  onChange={(e) =>
+                    updateQuantity(row['Item Id'], parseInt(e.target.value) || 0)
+                  }
+                  className='input_quantity'
+                />
+                <Button
+                  onClick={() =>
+                    updateQuantity(row['Item Id'], (row.Quantity || parseInt(formData.people)) + 10)
+                  }
+                >
+                  +
+                </Button>
+              </div>
+            </Box>
+          ))}
+          <a href='quotation'>
+            <Button
+              onClick={handleSubmit}
+              className='submit'
+            >
+              Submit
+            </Button>
+          </a>
+        </Paper>
+      ) : (
+        <Paper elevation={10} className='items_selector_container'>
+          <Box>
+            <Typography component='div' className='helper_text'>Please select the food items from the below list.</Typography>
+            <Stepper activeStep={activeStep} orientation="vertical">
+              {steps.map((step, index) => (
+                <Step key={step.label}>
+                  <StepLabel>{step.label}</StepLabel>
+                  <StepContent>
+                    <Paper sx={{ height: 400, width: '100%' }}>
+                      <DataGrid
+                        rows={step.rows}
+                        columns={[
+                          // { field: 'id', headerName: 'ID', width: 60 },
+                          { field: 'itemName', headerName: 'Item Name', width: 160 },
+                          { field: 'price', headerName: 'Price', width: 90 }
+                        ]}
+                        initialState={{ pagination: { paginationModel } }}
+                        pageSizeOptions={[5, 10]}
+                        checkboxSelection
+                        onRowSelectionModelChange={(selectedIds) =>
+                          setRowSelectionModel(selectedIds)
+                        }
+                        rowSelectionModel={rowSelectionModel}
+                        sx={{ border: 0 }}
+                      />
+                    </Paper>
+                    <Box sx={{ mb: 2 }}>
+                      <Button
+                        className='btn1'
+                        variant="contained"
+                        onClick={handleNext}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        {index === steps.length - 1 ? 'Finish' : 'Next'}
+                      </Button>
+                      <Button
+                        className='btn2'
+                        disabled={index === 0}
+                        onClick={handleBack}
+                        sx={{ mt: 1, mr: 1 }}
+                      >
+                        Prev
+                      </Button>
+                    </Box>
+                  </StepContent>
+                </Step>
+              ))}
+            </Stepper>
+            {steps.length !== 0 ? (
+              activeStep === steps.length && (
+                <Paper square elevation={0}>
+                  <Typography>You have completed, click on done</Typography>
+                  <Button style={{ backgroundColor: "#970747", color: "#fff" }} onClick={handleDone} sx={{ mt: 1, mr: 1 }}>
+                    Done
+                  </Button>
+                </Paper>
+              )
+            ) : (<div className='loading' ><CircularProgress color='#970747' /></div>)}
+          </Box>
+        </Paper>
+      )}
     </div>
   );
 }

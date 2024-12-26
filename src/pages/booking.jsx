@@ -8,6 +8,7 @@ import './booking.scss';
 function Booking() {
 
     const [functions, setFunctions] = useState([]);
+    const [done,setDone] = useState(false);
 
     const baseSheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRuWARY0Y8KpEDf7LCiMwg1cSNht-Jp_VcPj5cFr5P6DIDVVtddyenn89OKwu7Guc3x5KIAuQa7gnIa/pub?gid=319284677&single=true&output=csv';
     const fetchData = () => {
@@ -178,7 +179,7 @@ function Booking() {
         if (validateForm()) {
             if (!functions.includes(formData.date)) {
                 sessionStorage.setItem('formData', JSON.stringify(formData));
-                navigate('/booking');
+                setDone(true);
               } else {
                 alert("There is already a function booked on this date. Please choose a different date.");
               }
@@ -186,7 +187,7 @@ function Booking() {
     };
     return (
         <div className="booking_form">
-            {sessionStorage.getItem("formData") ? (
+            {done ? (
                 <Box
                 sx={{
                     display: 'flex',
