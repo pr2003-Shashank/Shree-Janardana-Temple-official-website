@@ -151,19 +151,19 @@ function GetDetails() {
                                             <strong>Email</strong>: {row['Email address'] || 'NA'}
                                         </ListItemText>
                                     </ListItem>
-                                    <ListItem >
-                                        <ListItemText>
-                                            <strong>No. of People</strong>: {row['Number of people'] || 'NA'}
-                                        </ListItemText>
-                                    </ListItem>
                                 </List>
                             </div>
                             <div className="list_container">
-                                <Typography className='list_title'><strong>Date</strong></Typography>
+                                <Typography className='list_title'><strong>Function details</strong></Typography>
                                 <List component="nav" aria-label="main mailbox folders">
                                     <ListItem >
                                         <ListItemText>
-                                            {row.Date}
+                                            <strong>Date</strong>: {row.Date}
+                                        </ListItemText>
+                                    </ListItem>
+                                    <ListItem >
+                                        <ListItemText>
+                                            <strong>No. of People</strong>: {row['Number of people'] || 'NA'}
                                         </ListItemText>
                                     </ListItem>
                                 </List>
