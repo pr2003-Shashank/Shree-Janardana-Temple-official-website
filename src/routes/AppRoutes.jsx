@@ -10,6 +10,7 @@ import DashboardLayout from "../layouts/DashboardLayout.jsx";
 import CalendarView from "../pages/calendarView.jsx";
 import FunctionsView from "../pages/functionsView.jsx";
 import GetDetails from "../pages/getDetails.jsx";
+import StaffManagement from "../pages/staffManagement.jsx";
 
 
 function AppRoutes(props) {
@@ -33,6 +34,7 @@ function AppRoutes(props) {
                     <Route path='' element={<Navigate to="/admin/calendar" />} />
                     <Route path="/admin/calendar" element={<CalendarView />} />
                     <Route path="/admin/functions" element={<FunctionsView />} />
+                    <Route path="/admin/staff" element={<StaffManagement/>}/>
                 </Route>
             </Routes>
         </>
