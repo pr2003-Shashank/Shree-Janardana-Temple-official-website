@@ -46,26 +46,173 @@
                                 color: $dark_pink;
                             }
                         }
+
+                        .MuiStepLabel-labelContainer {
+                            .MuiStepLabel-label {
+                                font-size: 1.0em;
+                                font-family: Poppins;
+
+                                @media screen and (max-width: 991px) {
+                                    font-size: 0.9em;
+                                }
+
+                                @media screen and (max-width: 768px) {
+                                    font-size: 0.8em;
+                                }
+
+                                @media screen and (max-width: 576px) {
+                                    font-size: 0.8em;
+                                }
+                            }
+                        }
                     }
+
                     .MuiStepContent-root {
                         .MuiCollapse-root {
                             .MuiCollapse-wrapper {
                                 .MuiCollapse-wrapperInner {
+                                    .MuiPaper-root {
+                                        .MuiDataGrid-root {
+                                            .MuiDataGrid-main {
+                                                .MuiDataGrid-virtualScroller {
+                                                    .MuiDataGrid-topContainer {
+                                                        font-size: 1.0em;
+
+                                                        @media screen and (max-width: 991px) {
+                                                            font-size: 0.9em;
+                                                        }
+
+                                                        @media screen and (max-width: 768px) {
+                                                            font-size: 0.9em;
+                                                        }
+
+                                                        @media screen and (max-width: 576px) {
+                                                            font-size: 0.8em;
+                                                        }
+                                                    }
+
+                                                    .MuiDataGrid-virtualScrollerContent {
+                                                        .MuiDataGrid-cell {
+                                                            font-size: 1.0em;
+
+                                                            @media screen and (max-width: 991px) {
+                                                                font-size: 0.9em;
+                                                            }
+
+                                                            @media screen and (max-width: 768px) {
+                                                                font-size: 0.9em;
+                                                            }
+
+                                                            @media screen and (max-width: 576px) {
+                                                                font-size: 0.8em;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            .MuiDataGrid-footerContainer {
+                                                .MuiDataGrid-selectedRowCount {
+                                                    font-size: 1.0em;
+                                                    font-family: Poppins;
+
+                                                    @media screen and (max-width: 991px) {
+                                                        font-size: 0.9em;
+                                                    }
+
+                                                    @media screen and (max-width: 768px) {
+                                                        font-size: 0.9em;
+                                                    }
+
+                                                    @media screen and (max-width: 576px) {
+                                                        font-size: 0.8em;
+                                                    }
+                                                }
+
+                                                .MuiTablePagination-root {
+                                                    .MuiToolbar-root {
+                                                        .MuiTablePagination-selectLabel {
+                                                            font-size: 1.0em;
+                                                            font-family: Poppins;
+
+                                                            @media screen and (max-width: 991px) {
+                                                                font-size: 0.9em;
+                                                            }
+
+                                                            @media screen and (max-width: 768px) {
+                                                                font-size: 0.9em;
+                                                            }
+
+                                                            @media screen and (max-width: 576px) {
+                                                                font-size: 0.8em;
+                                                            }
+                                                        }
+
+                                                        .MuiTablePagination-displayedRows {
+                                                            font-size: 1.0em;
+                                                            font-family: Poppins;
+
+                                                            @media screen and (max-width: 991px) {
+                                                                font-size: 0.9em;
+                                                            }
+
+                                                            @media screen and (max-width: 768px) {
+                                                                font-size: 0.9em;
+                                                            }
+
+                                                            @media screen and (max-width: 576px) {
+                                                                font-size: 0.8em;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
                                     .MuiButtonBase-root {
-                                        .MuiSvgIcon-root{
+                                        .MuiSvgIcon-root {
                                             fill: $dark_pink;
                                         }
                                     }
-    
+
                                     .MuiBox-root {
                                         .btn1 {
                                             background-color: $dark_pink;
                                             color: $white;
+                                            font-size: 1.0em;
+                                            font-family: Poppins;
+
+                                            @media screen and (max-width: 991px) {
+                                                font-size: 0.9em;
+                                            }
+
+                                            @media screen and (max-width: 768px) {
+                                                font-size: 0.8em;
+                                            }
+
+                                            @media screen and (max-width: 576px) {
+                                                font-size: 0.7em;
+                                            }
                                         }
-    
+
                                         .btn2 {
                                             background-color: $white;
                                             color: $dark_pink;
+                                            font-size: 1.0em;
+                                            font-family: Poppins;
+
+                                            @media screen and (max-width: 991px) {
+                                                font-size: 0.9em;
+                                            }
+
+                                            @media screen and (max-width: 768px) {
+                                                font-size: 0.8em;
+                                            }
+
+                                            @media screen and (max-width: 576px) {
+                                                font-size: 0.7em;
+                                            }
                                         }
                                     }
                                 }
@@ -74,7 +221,8 @@
                     }
                 }
             }
-            .loading{
+
+            .loading {
                 display: flex;
                 justify-content: center;
             }
