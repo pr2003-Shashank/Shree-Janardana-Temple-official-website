@@ -22,7 +22,7 @@
         }
 
         @media screen and (max-width: 991px) {
-            width: 60vw;
+            width: 40vw;
         }
 
         @media screen and (max-width: 768px) {
@@ -66,7 +66,38 @@
             width: 100%;
 
             .MuiFormLabel-root {
+                font-family: Poppins;
                 color: $dark_pink;
+                font-size: 1.0em;
+
+                @media screen and (max-width: 991px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 576px) {
+                    font-size: 0.8em;
+                }
+            }
+
+            .MuiInputBase-root {
+                font-family: Poppins;
+                font-size: 1.0em;
+
+                @media screen and (max-width: 991px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 768px) {
+                    font-size: 0.9em;
+                }
+
+                @media screen and (max-width: 576px) {
+                    font-size: 0.8em;
+                }
             }
 
             .MuiButtonBase-root {
@@ -89,6 +120,7 @@
 
         .MuiButtonBase-root {
             display: flex;
+            font-family: Poppins;
             background-color: $dark_pink ;
             width: 100%;
         }
