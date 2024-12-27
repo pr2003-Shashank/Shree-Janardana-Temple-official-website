@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './login.scss';
-import Logo from '../assets/images/Janardana.jpeg';
+import Logo from '../assets/images/Janardana.png';
 import { Link, TextField, Typography, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, Button, Stack } from "@mui/material";
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";

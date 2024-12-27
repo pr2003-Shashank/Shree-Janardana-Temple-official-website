@@ -14,7 +14,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
 import jsPDF from "jspdf"; // PDF creation library
 import autoTable from "jspdf-autotable";// For Tables in PDF
-import logoImage from "../assets/images/Janardana.jpeg";
+import logoImage from "../assets/images/Janardana.png";
 
 function ItemSelector() {
   const [steps, setSteps] = useState([]);
